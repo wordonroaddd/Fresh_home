@@ -1,1 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fresh Home Cleaners | Los Angeles</title>
+<meta name="description" content="Family-owned home cleaning in Los Angeles. A deep cleaning, every cleaning. Quote on request." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg: #f4f1ea;
+--bg-2: #ebe6dc;
+--ink: #1f2e2c;
+--ink-soft: #44524f;
+--sage: #94a89a;
+--sage-deep: #6c8478;
+--sage-shadow: #4d6359;
+--sky: #b9cdd6;
+--sky-deep: #7d9eaa;
+--leaf: #d8e2d4;
+--line: #c9c0b0;
+--paper: #fbf9f4;
+--serif: 'Cormorant Garamond', 'Times New Roman', serif;
+--sans: 'Inter', system-ui, sans-serif;
+}
 
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+background: var(--bg);
+color: var(--ink);
+font-family: var(--sans);
+font-weight: 300;
+font-size: 16px;
+line-height: 1.6;
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
+}
+
+/* Grain overlay for paper texture */
+body::before {
+content: '';
+position: fixed;
+inset: 0;
+pointer-events: none;
+z-index: 100;
+opacity: 0.35;
+mix-blend-mode: multiply;
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.15 0 0 0 0 0.13 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* ===== NAV ===== */
+nav {
+position: fixed;
+top: 0; left: 0; right: 0;
+padding: 28px 48px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+z-index: 50;
+transition: background 0.4s ease, backdrop-filter 0.4s ease, padding 0.4s ease;
+}
+nav.scrolled {
+background: rgba(244, 241, 234, 0.85);
+backdrop-filter: blur(12px);
+padding: 18px 48px;
+border-bottom: 1px solid var(--line);
+}
+.brand {
+font-family: var(--serif);
+font-style: italic;
+font-weight: 400;
+font-size: 22px;
+letter-spacing: 0.02em;
+color: var(--ink);
+}
+.brand span { color: var(--sage-deep); }
+.nav-links {
+display: flex;
+gap: 36px;
+align-items: center;
+}
+.nav-links a {
+text-decoration: none;
+color: var(--ink-soft);
+font-size: 13px;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+font-weight: 400;
+transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--sage-shadow); }
+.nav-cta {
+padding: 10px 22px;
+border: 1px solid var(--ink);
+border-radius: 999px;
+color: var(--ink) !important;
+transition: all 0.3s;
+}
+.nav-cta:hover {
+background: var(--ink);
+color: var(--paper) !important;
+}
+
+/* ===== HERO ===== */
+.hero {
+min-height: 100vh;
+padding: 140px 48px 80px;
+position: relative;
+display: grid;
+grid-template-columns: 1.1fr 0.9fr;
+gap: 60px;
+align-items: center;
+}
+
+.hero-text {
+position: relative;
+z-index: 2;
+}
+
+.eyebrow {
+display: inline-flex;
+align-items: center;
+gap: 12px;
+font-size: 12px;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(--sage-shadow);
+margin-bottom: 28px;
+opacity: 0;
+animation: fadeUp 0.9s 0.1s forwards;
+}
+.eyebrow::before {
+content: '';
+width: 32px;
+height: 1px;
+background: var(--sage-deep);
+}
+
+.hero h1 {
+font-family: var(--serif);
+font-weight: 400;
+font-size: clamp(48px, 6.2vw, 92px);
+line-height: 1.02;
+letter-spacing: -0.01em;
+color: var(--ink);
+margin-bottom: 32px;
+opacity: 0;
+animation: fadeUp 1s 0.2s forwards;
+}
+.hero h1 em {
+font-style: italic;
+color: var(--sage-shadow);
+font-weight: 300;
+}
+.hero h1 .ampersand {
+font-style: italic;
+color: var(--sky-deep);
+font-weight: 300;
+margin: 0 0.05em;
+}
+
+.hero-sub {
+font-size: 18px;
+line-height: 1.65;
+color: var(--ink-soft);
+max-width: 480px;
+margin-bottom: 44px;
+font-weight: 300;
+opacity: 0;
+animation: fadeUp 1s 0.4s forwards;
+}
+
+.hero-actions {
+display: flex;
+gap: 20px;
+align-items: center;
+opacity: 0;
+animation: fadeUp 1s 0.55s forwards;
+}
+
+.btn-primary {
+display: inline-flex;
+align-items: center;
+gap: 14px;
+padding: 18px 32px;
+background: var(--ink);
+color: var(--paper);
+text-decoration: none;
+font-size: 13px;
+letter-spacing: 0.16em;
+text-transform: uppercase;
+font-weight: 400;
+border-radius: 999px;
+transition: all 0.3s ease;
+position: relative;
+overflow: hidden;
+}
+.btn-primary::after {
+content: '→';
+transition: transform 0.3s;
+font-size: 16px;
+}
+.btn-primary:hover {
+background: var(--sage-shadow);
+}
+.btn-primary:hover::after {
+transform: translateX(4px);
+}
+
+.btn-text {
+color: var(--ink-soft);
+text-decoration: none;
+font-size: 13px;
+letter-spacing: 0.16em;
+text-transform: uppercase;
+border-bottom: 1px solid var(--ink-soft);
+padding-bottom: 4px;
+transition: color 0.3s, border-color 0.3s;
+}
+.btn-text:hover {
+color: var(--sage-shadow);
+border-color: var(--sage-shadow);
+}
+
+/* ===== HERO VISUAL ===== */
+.hero-visual {
+position: relative;
+height: 560px;
+opacity: 0;
+animation: fadeUp 1.2s 0.5s forwards;
+}
+
+.visual-frame {
+position: absolute;
+inset: 0;
+background: linear-gradient(135deg, var(--leaf) 0%, var(--sky) 100%);
+border-radius: 280px 280px 60px 60px;
+overflow: hidden;
+}
+
+.visual-frame::before {
+content: '';
+position: absolute;
+inset: 0;
+background:
+radial-gradient(circle at 30% 20%, rgba(255,255,255,0.4), transparent 50%),
+radial-gradient(circle at 70% 80%, rgba(108, 132, 120, 0.3), transparent 60%);
+}
+
+.visual-svg {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+}
+
+.floating-card {
+position: absolute;
+background: var(--paper);
+padding: 18px 22px;
+border-radius: 16px;
+box-shadow: 0 20px 50px -20px rgba(31, 46, 44, 0.25);
+display: flex;
+align-items: center;
+gap: 14px;
+z-index: 3;
+}
+.card-1 {
+top: 8%;
+right: -20px;
+animation: floatA 6s ease-in-out infinite;
+}
+.card-2 {
+bottom: 12%;
+left: -30px;
+animation: floatB 7s ease-in-out infinite;
+}
+.card-icon {
+width: 38px;
+height: 38px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+}
+.card-1 .card-icon { background: var(--leaf); }
+.card-2 .card-icon { background: var(--sky); }
+
+.card-text {
+font-family: var(--serif);
+font-size: 18px;
+line-height: 1.2;
+color: var(--ink);
+}
+.card-text small {
+display: block;
+font-family: var(--sans);
+font-size: 10px;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(--sage-shadow);
+margin-bottom: 4px;
+font-weight: 400;
+}
+
+/* ===== TICKER ===== */
+.ticker {
+border-top: 1px solid var(--line);
+border-bottom: 1px solid var(--line);
+padding: 22px 0;
+overflow: hidden;
+background: var(--bg-2);
+}
+.ticker-track {
+display: flex;
+gap: 60px;
+white-space: nowrap;
+animation: scroll 40s linear infinite;
+}
+.ticker span {
+font-family: var(--serif);
+font-style: italic;
+font-size: 24px;
+color: var(--ink-soft);
+display: inline-flex;
+align-items: center;
+gap: 60px;
+}
+.ticker span::after {
+content: '✦';
+color: var(--sage-deep);
+font-style: normal;
+font-size: 14px;
+}
+
+/* ===== SERVICES ===== */
+.services {
+padding: 140px 48px;
+max-width: 1280px;
+margin: 0 auto;
+}
+
+.section-head {
+display: grid;
+grid-template-columns: 1fr 1.2fr;
+gap: 80px;
+margin-bottom: 100px;
+align-items: end;
+}
+
+.section-label {
+font-size: 12px;
+letter-spacing: 0.22em;
+text-transform: uppercase;
+color: var(--sage-shadow);
+margin-bottom: 24px;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+.section-label::before {
+content: '01 /';
+color: var(--ink-soft);
+font-family: var(--serif);
+font-style: italic;
+font-size: 16px;
+letter-spacing: 0;
+}
+
+.section-head h2 {
+font-family: var(--serif);
+font-weight: 400;
+font-size: clamp(36px, 4.5vw, 64px);
+line-height: 1.05;
+letter-spacing: -0.01em;
+}
+.section-head h2 em {
+font-style: italic;
+color: var(--sage-shadow);
+}
+
+.section-head p {
+font-size: 17px;
+line-height: 1.7;
+color: var(--ink-soft);
+max-width: 480px;
+}
+
+.service-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 0;
+border-top: 1px solid var(--line);
+}
+
+.service-item {
+padding: 48px 36px 56px;
+border-bottom: 1px solid var(--line);
+border-right: 1px solid var(--line);
+position: relative;
+transition: background 0.4s ease;
+cursor: default;
+}
+.service-item:nth-child(2n) { border-right: none; }
+.service-item:hover {
+background: var(--paper);
+}
+.service-item:hover .service-num {
+color: var(--sage-shadow);
+}
+
+.service-num {
+font-family: var(--serif);
+font-style: italic;
+font-size: 20px;
+color: var(--line);
+margin-bottom: 60px;
+display: block;
+transition: color 0.4s;
+}
+
+.service-item h3 {
+font-family: var(--serif);
+font-weight: 400;
+font-size: 30px;
+line-height: 1.15;
+margin-bottom: 16px;
+color: var(--ink);
+}
+.service-item h3 em {
+font-style: italic;
+color: var(--sage-shadow);
+}
+
+.service-item p {
+font-size: 14px;
+color: var(--ink-soft);
+line-height: 1.65;
+}
+
+/* ===== STORY ===== */
+.story {
+padding: 140px 48px;
+background: linear-gradient(to bottom, var(--bg) 0%, var(--bg-2) 100%);
+position: relative;
+overflow: hidden;
+}
+
+.story::before {
+content: '';
+position: absolute;
+top: -200px;
+right: -100px;
+width: 500px;
+height: 500px;
+background: radial-gradient(circle, var(--leaf), transparent 70%);
+border-radius: 50%;
+opacity: 0.5;
+}
+
+.story-inner {
+max-width: 980px;
+margin: 0 auto;
+text-align: center;
+position: relative;
+z-index: 2;
+}
+
+.story-quote {
+font-family: var(--serif);
+font-style: italic;
+font-weight: 300;
+font-size: clamp(32px, 4vw, 56px);
+line-height: 1.25;
+color: var(--ink);
+letter-spacing: -0.005em;
+margin-bottom: 48px;
+}
+.story-quote .accent {
+color: var(--sage-shadow);
+}
+
+.story-attribution {
+font-size: 12px;
+letter-spacing: 0.22em;
+text-transform: uppercase;
+color: var(--ink-soft);
+display: inline-flex;
+align-items: center;
+gap: 14px;
+}
+.story-attribution::before,
+.story-attribution::after {
+content: '';
+width: 28px;
+height: 1px;
+background: var(--ink-soft);
+}
+
+/* ===== PROMISE STRIP ===== */
+.promise {
+padding: 80px 48px;
+border-top: 1px solid var(--line);
+border-bottom: 1px solid var(--line);
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+max-width: 1280px;
+margin: 0 auto;
+gap: 40px;
+}
+.promise-item {
+text-align: center;
+padding: 0 20px;
+position: relative;
+}
+.promise-item:not(:last-child)::after {
+content: '';
+position: absolute;
+right: -20px;
+top: 10%;
+bottom: 10%;
+width: 1px;
+background: var(--line);
+}
+.promise-num {
+font-family: var(--serif);
+font-size: 56px;
+font-weight: 300;
+color: var(--sage-shadow);
+line-height: 1;
+margin-bottom: 12px;
+}
+.promise-num em {
+font-style: italic;
+color: var(--sky-deep);
+}
+.promise-label {
+font-size: 12px;
+letter-spacing: 0.16em;
+text-transform: uppercase;
+color: var(--ink-soft);
+}
+
+/* ===== CONTACT ===== */
+.contact {
+padding: 160px 48px;
+text-align: center;
+background: var(--bg);
+position: relative;
+}
+
+.contact-inner {
+max-width: 760px;
+margin: 0 auto;
+position: relative;
+}
+
+.contact-label {
+font-size: 12px;
+letter-spacing: 0.22em;
+text-transform: uppercase;
+color: var(--sage-shadow);
+margin-bottom: 32px;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 12px;
+}
+.contact-label::before,
+.contact-label::after {
+content: '';
+width: 32px;
+height: 1px;
+background: var(--sage-deep);
+}
+
+.contact h2 {
+font-family: var(--serif);
+font-weight: 400;
+font-size: clamp(44px, 5.5vw, 80px);
+line-height: 1.05;
+letter-spacing: -0.01em;
+margin-bottom: 28px;
+}
+.contact h2 em {
+font-style: italic;
+color: var(--sage-shadow);
+}
+
+.contact p {
+font-size: 18px;
+color: var(--ink-soft);
+margin-bottom: 56px;
+line-height: 1.6;
+}
+
+.contact-cta {
+display: inline-flex;
+align-items: center;
+gap: 16px;
+padding: 22px 44px;
+background: var(--ink);
+color: var(--paper);
+text-decoration: none;
+font-size: 14px;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+border-radius: 999px;
+transition: all 0.3s ease;
+}
+.contact-cta::after {
+content: '→';
+font-size: 18px;
+transition: transform 0.3s;
+}
+.contact-cta:hover {
+background: var(--sage-shadow);
+}
+.contact-cta:hover::after {
+transform: translateX(6px);
+}
+
+.contact-phone {
+margin-top: 28px;
+font-size: 15px;
+color: var(--ink-soft);
+}
+.contact-phone a {
+font-family: var(--serif);
+font-size: 22px;
+color: var(--ink);
+text-decoration: none;
+border-bottom: 1px solid var(--sage);
+padding-bottom: 2px;
+margin-left: 6px;
+transition: color 0.3s, border-color 0.3s;
+}
+.contact-phone a:hover {
+color: var(--sage-shadow);
+border-color: var(--sage-shadow);
+}
+
+/* ===== FOOTER ===== */
+footer {
+padding: 40px 48px;
+border-top: 1px solid var(--line);
+background: var(--bg-2);
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 12px;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-soft);
+}
+footer .brand { font-size: 16px; }
+footer a {
+color: var(--ink-soft);
+text-decoration: none;
+transition: color 0.3s;
+}
+footer a:hover { color: var(--sage-shadow); }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(24px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatA {
+0%, 100% { transform: translateY(0) rotate(-2deg); }
+50% { transform: translateY(-12px) rotate(-2deg); }
+}
+@keyframes floatB {
+0%, 100% { transform: translateY(0) rotate(3deg); }
+50% { transform: translateY(-10px) rotate(3deg); }
+}
+
+@keyframes scroll {
+from { transform: translateX(0); }
+to { transform: translateX(-50%); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 980px) {
+.hero {
+grid-template-columns: 1fr;
+padding: 120px 28px 60px;
+gap: 60px;
+}
+.hero-visual { height: 420px; }
+nav, .services, .story, .contact, footer, .promise { padding-left: 28px; padding-right: 28px; }
+.section-head { grid-template-columns: 1fr; gap: 30px; margin-bottom: 60px; }
+.service-grid { grid-template-columns: 1fr; }
+.service-item { border-right: none !important; }
+.promise { grid-template-columns: repeat(2, 1fr); gap: 50px 20px; padding: 60px 28px; }
+.promise-item:nth-child(2)::after { display: none; }
+.nav-links { gap: 20px; }
+.nav-links a:not(.nav-cta) { display: none; }
+nav { padding: 18px 28px; }
+nav.scrolled { padding: 14px 28px; }
+footer { flex-direction: column; gap: 16px; text-align: center; }
+}
+
+@media (max-width: 560px) {
+.hero-actions { flex-direction: column; align-items: flex-start; gap: 18px; }
+.btn-primary { width: 100%; justify-content: space-between; }
+.floating-card { display: none; }
+.visual-frame { border-radius: 200px 200px 40px 40px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+<div class="brand">Fresh Home <span>Cleaners</span></div>
+<div class="nav-links">
+<a href="#services">Services</a>
+<a href="#story">Our Care</a>
+<a href="mailto:rubyguitierrez2006@gmail.com?subject=Quote%20Request%20from%20Fresh%20Home%20Cleaners%20website&body=Hi%20Ruby%2C%0D%0A%0D%0AI%27d%20like%20a%20quote.%0D%0A%0D%0AName%3A%0D%0AAddress%3A%0D%0AHome%20size%20(beds%2Fbaths%20or%20sq%20ft)%3A%0D%0AService%20needed%3A%0D%0APreferred%20date%3A%0D%0A%0D%0AThanks!" class="nav-cta">Request a Quote</a>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-text">
+<h1>A <em>deep</em> cleaning,<br><em>every</em> cleaning</h1>
+<p class="hero-sub">Fresh Home Cleaners is a Los Angeles based, family-owned cleaning service that you can trust to take care of your home as if it's our own and leave it sparkling clean.</p>
+<div class="hero-actions">
+<a href="mailto:rubyguitierrez2006@gmail.com?subject=Quote%20Request%20from%20Fresh%20Home%20Cleaners%20website&body=Hi%20Ruby%2C%0D%0A%0D%0AI%27d%20like%20a%20quote.%0D%0A%0D%0AName%3A%0D%0AAddress%3A%0D%0AHome%20size%20(beds%2Fbaths%20or%20sq%20ft)%3A%0D%0AService%20needed%3A%0D%0APreferred%20date%3A%0D%0A%0D%0AThanks!" class="btn-primary">Request a Quote</a>
+<a href="#services" class="btn-text">See what we do</a>
+</div>
+</div>
+
+<div class="hero-visual">
+<div class="visual-frame">
+<svg class="visual-svg" viewBox="0 0 400 560" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+<defs>
+<linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#a4baa7"/>
+<stop offset="100%" stop-color="#6c8478"/>
+</linearGradient>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#cad9e0"/>
+<stop offset="100%" stop-color="#7d9eaa"/>
+</linearGradient>
+</defs>
+<!-- Soft window arches -->
+<path d="M 80 460 Q 80 280 200 280 Q 320 280 320 460 Z" fill="url(#sky)" opacity="0.45"/>
+<!-- Botanical sprigs -->
+<g stroke="url(#leaf)" stroke-width="1.5" fill="none" opacity="0.75">
+<path d="M 100 380 Q 110 340 130 320"/>
+<path d="M 110 360 Q 120 350 130 350" stroke-linecap="round"/>
+<path d="M 115 345 Q 125 340 132 335" stroke-linecap="round"/>
+<path d="M 120 330 Q 128 327 132 325" stroke-linecap="round"/>
+</g>
+<g stroke="url(#leaf)" stroke-width="1.5" fill="none" opacity="0.75">
+<path d="M 300 400 Q 290 360 270 340"/>
+<path d="M 290 380 Q 280 370 270 370" stroke-linecap="round"/>
+<path d="M 285 365 Q 275 360 268 355" stroke-linecap="round"/>
+<path d="M 280 350 Q 272 347 268 345" stroke-linecap="round"/>
+</g>
+<!-- Leaves -->
+<ellipse cx="200" cy="180" rx="28" ry="55" fill="url(#leaf)" opacity="0.7" transform="rotate(-15 200 180)"/>
+<ellipse cx="220" cy="200" rx="22" ry="42" fill="url(#leaf)" opacity="0.55" transform="rotate(20 220 200)"/>
+<path d="M 200 130 Q 200 240 200 240" stroke="#4d6359" stroke-width="1.5" fill="none" opacity="0.6"/>
+<!-- Subtle circle -->
+<circle cx="200" cy="430" r="60" fill="none" stroke="#4d6359" stroke-width="0.5" opacity="0.3"/>
+<circle cx="200" cy="430" r="80" fill="none" stroke="#4d6359" stroke-width="0.5" opacity="0.2"/>
+</svg>
+</div>
+
+<div class="floating-card card-1">
+<div class="card-icon">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4d6359" stroke-width="1.6" stroke-linecap="round"><path d="M12 2 L12 22 M2 12 L22 12" opacity="0.4"/><circle cx="12" cy="12" r="9"/></svg>
+</div>
+<div class="card-text">
+<small>Eco-conscious</small>
+Plant-based products
+</div>
+</div>
+
+<div class="floating-card card-2">
+<div class="card-icon">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7d9eaa" stroke-width="1.6" stroke-linecap="round"><path d="M20 6 L9 17 L4 12"/></svg>
+</div>
+<div class="card-text">
+<small>Trusted</small>
+Bonded &amp; insured
+</div>
+</div>
+</div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+<div class="ticker-track">
+<span>Standard cleaning</span>
+<span>Recurring service</span>
+<span>Pre &amp; post event</span>
+<span>Add-ons</span>
+<span>Los Angeles</span>
+<span>Family-owned</span>
+<span>Standard cleaning</span>
+<span>Recurring service</span>
+<span>Pre &amp; post event</span>
+<span>Add-ons</span>
+<span>Los Angeles</span>
+<span>Family-owned</span>
+</div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+<div class="section-head">
+<div>
+<div class="section-label">Our Services</div>
+<h2>Professionalism and <em>perfection</em> are our goal</h2>
+</div>
+<p>Every home tells a story, and every story deserves a clean page. Whether we're seeing you weekly or once after an event, we shape each visit with your satisfaction as our top priority.</p>
+</div>
+
+<div class="service-grid">
+<div class="service-item">
+<span class="service-num">i.</span>
+<h3>Standard <em>Cleaning</em></h3>
+<p>Our standard is always a deep clean, from bathrooms to baseboards to appliances and everything in between.</p>
+</div>
+<div class="service-item">
+<span class="service-num">ii.</span>
+<h3>Recurring <em>Service</em></h3>
+<p>Weekly, bi-weekly, or monthly visits on a schedule that works for you. Same team, same standard, every time.</p>
+</div>
+<div class="service-item">
+<span class="service-num">iii.</span>
+<h3>Pre &amp; Post <em>Event</em></h3>
+<p>Hosting or hosted? Let us handle what comes before, and the morning after.</p>
+</div>
+<div class="service-item">
+<span class="service-num">iv.</span>
+<h3>Add <em>Ons</em></h3>
+<p>Additional services include outdoor spaces, windows, and laundry. Whatever you need, don't hesitate to ask.</p>
+</div>
+</div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="story">
+<div class="story-inner">
+<p class="story-quote">"We take pride in what we do: giving our clients the gift of <span class="accent">walking in and exhaling</span>."</p>
+<div class="story-attribution">Ruby Guitierrez, Owner of Fresh Home Cleaners</div>
+</div>
+</section>
+
+<!-- PROMISE -->
+<div class="promise">
+<div class="promise-item">
+<div class="promise-num">100<em>%</em></div>
+<div class="promise-label">Satisfaction</div>
+</div>
+<div class="promise-item">
+<div class="promise-num">5<em>★</em></div>
+<div class="promise-label">Local Reviews</div>
+</div>
+<div class="promise-item">
+<div class="promise-num">Eco</div>
+<div class="promise-label">Friendly Products</div>
+</div>
+<div class="promise-item">
+<div class="promise-num">L<em>·</em>A</div>
+<div class="promise-label">Proudly Serving Los Angeles</div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+<div class="contact-inner">
+<div class="contact-label">Let's Begin</div>
+<h2>Ready for a <em>fresher</em> home?</h2>
+<p>Send us a note with your address and what you'd like done. We'll reply with a quote, usually within a day.</p>
+<a href="mailto:rubyguitierrez2006@gmail.com?subject=Quote%20Request%20from%20Fresh%20Home%20Cleaners%20website&body=Hi%20Ruby%2C%0D%0A%0D%0AI%27d%20like%20a%20quote%20for%20cleaning.%0D%0A%0D%0AName%3A%0D%0AAddress%3A%0D%0AHome%20size%20(beds%2Fbaths%20or%20sq%20ft)%3A%0D%0AService%20needed%3A%0D%0APreferred%20date%3A%0D%0A%0D%0AThanks!" class="contact-cta">Request a Quote</a>
+<p class="contact-phone">Prefer to talk? Call or text <a href="tel:+18184482580">(818) 448-2580</a></p>
+</div>
+</section>
+
+<footer>
+<div class="brand">Fresh Home <span>Cleaners</span></div>
+<div><a href="tel:+18184482580">(818) 448-2580</a> · © 2026 · Los Angeles</div>
+</footer>
+
+<script>
+// Subtle nav background on scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+if (window.scrollY > 30) nav.classList.add('scrolled');
+else nav.classList.remove('scrolled');
+});
+</script>
+
+</body>
+</html>
